@@ -122,17 +122,17 @@ if todos:
 
     for todo in todos:
 
-    col1, col2 = st.columns([4, 1])
+   	 col1, col2 = st.columns([4, 1])
 
-    with col1:
-        st.write(todo["task"])
+    	with col1:
+        	st.write(todo["task"])
 
-    with col2:
-        if st.button("✅", key=f"delete_{todo['id']}"):
+    	with col2:
+        	if st.button("✅", key=f"delete_{todo['id']}"):
 
-            delete_todo(todo["id"])
+            	delete_todo(todo["id"])
 
-            st.rerun()
+            	st.rerun()
 
 else:
     st.info("No hay productos.")
