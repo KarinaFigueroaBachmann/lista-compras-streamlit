@@ -10,6 +10,11 @@ key = os.getenv("SUPABASE_ANON_KEY")
 
 supabase: Client = create_client(url, key)
 
+def delete_todo(todo_id):
+    supabase.table("todos") \
+        .delete() \
+        .eq("id", todo_id) \
+        .execute()
 
 def add_todo(task, user_id):
     supabase.table("todos").insert({
@@ -116,7 +121,18 @@ st.write("### Lista de Compras")
 if todos:
 
     for todo in todos:
-        st.write(f"• {todo['task']}")
+
+    col1, col2 = st.columns([4, 1])
+
+    with col1:
+        st.write(todo["task"])
+
+    with col2:
+        if st.button("✅", key=f"delete_{todo['id']}"):
+
+            delete_todo(todo["id"])
+
+            st.rerun()
 
 else:
     st.info("No hay productos.")
